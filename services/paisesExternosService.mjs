@@ -1,19 +1,17 @@
 import { guardarPaises, listarPaises } from "../repositories/paisRepository.mjs";
 
-//Traer paises de la API y filtrar solo los que tienen idioma español
+// Traer países de la API externa
 export async function traerPaisesExternos() {
   const respuesta = await fetch('https://restcountries.com/v3.1/all');
   const paises = await respuesta.json();
 
-  console.log(paises);
-
-  // Filtramos paises que hablen sop antes
+  // Filtrar países que tienen idioma español
   const paisesFiltrados = paises
     .filter(pais => pais.languages && pais.languages.spa)
     .map(pais => {
       const nuevoPais = { ...pais };
 
-      // Eliminamos campos solicitados
+      // Eliminamos campos que no queremos guardar
       delete nuevoPais.translations;
       delete nuevoPais.tld;
       delete nuevoPais.cca2;
@@ -27,21 +25,34 @@ export async function traerPaisesExternos() {
       delete nuevoPais.postalCode;
       delete nuevoPais.demonyms;
 
-      // Agregamos el creador
+      // Agregamos campo adicional
       nuevoPais.creador = "Diego Cardenes";
 
       return nuevoPais;
     });
 
   return paisesFiltrados;
-};
+}
 
-// Guardar paises filtrados en la base de datos
+// Guardar los países filtrados en MongoDB
 export async function guardarPaisesFiltrados(paisesFiltrados) {
-  return await guardarPaises(paisesFiltrados);
-};
+  try {
+    const resultado = await guardarPaises(paisesFiltrados);
+    console.log(`✅ ${paisesFiltrados.length} países guardados exitosamente.`);
+    return resultado;
+  } catch (error) {
+    console.error("❌ Error al guardar los países:", error.message);
+    throw error;
+  }
+}
 
-// Obtener todos los paises ya guardados por las dudas
+// Listar los países ya guardados
 export async function obtenerTodosLosPaises() {
-  return await listarPaises();
-};
+  try {
+    const paises = await listarPaises();
+    return paises;
+  } catch (error) {
+    console.error("❌ Error al listar los países:", error.message);
+    throw error;
+  }
+}

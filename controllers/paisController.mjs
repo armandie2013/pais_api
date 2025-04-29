@@ -1,4 +1,4 @@
-import { traerPaisesExternos, guardarPaisesFiltrados, obtenerTodosLosPaises } from "../services/paisService.mjs";
+import { traerPaisesExternos} from "../services/paisesExternosService.mjs";
 
 export async function cargarPaisesController(req, res) {
   try {

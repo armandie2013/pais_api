@@ -1,17 +1,21 @@
+import { connectDB } from "./config/dbConfig.mjs";
+import { traerPaisesExternos, guardarPaisesFiltrados } from "./services/paisesExternosService.mjs";
 
+async function main() {
+  try {
+    await connectDB(); // ✅ Primero conectar a la base
 
-async function traerPaisesConIdiomaEspanol() {
-    try {
-      const respuesta = await fetch('https://restcountries.com/v3.1/all');
-      const paises = await respuesta.json();
-  
-      const paisesFiltrados = paises.filter(pais => pais.languages && pais.languages.spa);
-  
-      console.log(`✅ Cantidad de países que hablan español: ${paisesFiltrados.length}`);
-      console.log("Ejemplo de un país:", paisesFiltrados[0]);
-    } catch (error) {
-      console.error("❌ Error al traer países:", error);
-    };
-  };
-  
-  traerPaisesConIdiomaEspanol();
+    const paisesFiltrados = await traerPaisesExternos();
+    console.log(`Se filtraron ${paisesFiltrados.length} países.`);
+
+    await guardarPaisesFiltrados(paisesFiltrados);
+    console.log("Países guardados exitosamente.");
+
+    process.exit(0); // Terminar bien
+  } catch (error) {
+    console.error("Error general:", error);
+    process.exit(1); // Terminar mal
+  }
+}
+
+main();
