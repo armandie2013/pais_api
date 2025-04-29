@@ -1,0 +1,56 @@
+
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">🌎 Dashboard de Países</h1>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="py-3 px-6 text-left">Nombre Oficial</th>
+            <th class="py-3 px-6 text-left">Capital</th>
+            <th class="py-3 px-6 text-left">Fronteras</th>
+            <th class="py-3 px-6 text-left">Área (km²)</th>
+            <th class="py-3 px-6 text-left">Población</th>
+            <th class="py-3 px-6 text-left">Zonas Horarias</th>
+            <th class="py-3 px-6 text-left">Bandera</th>
+            <th class="py-3 px-6 text-left">Creado Por</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% paises.forEach(pais=> { %>
+            <tr class="border-b hover:bg-gray-100">
+              <td class="py-4 px-6">
+                <%= pais.name?.nativeName?.spa?.official || "Sin nombre oficial en español" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= pais.capital ? pais.capital[0] : "Sin capital" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= pais.borders?.length> 0 ? pais.borders.join(", ") : "Sin fronteras" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= pais.area ? pais.area.toLocaleString() : "Sin datos" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= pais.population ? pais.population.toLocaleString() : "Sin datos" %>
+              </td>
+              <td class="py-4 px-6">
+                <%= pais.timezones?.length> 0 ? pais.timezones.join(", ") : "Sin datos" %>
+              </td>
+              <td class="py-4 px-6">
+                <% if (pais.flags?.png) { %>
+                  <img src="<%= pais.flags.png %>" alt="Bandera de <%= pais.name.common %>" class="h-8 w-12">
+                  <% } else { %>
+                    Sin imagen
+                    <% } %>
+              </td>
+              <td class="py-4 px-6">
+                <%= pais.creador || "Desconocido" %>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>

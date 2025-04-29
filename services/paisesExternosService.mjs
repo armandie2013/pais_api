@@ -38,10 +38,10 @@ export async function traerPaisesExternos() {
 export async function guardarPaisesFiltrados(paisesFiltrados) {
   try {
     const resultado = await guardarPaises(paisesFiltrados);
-    console.log(`✅ ${paisesFiltrados.length} países guardados exitosamente.`);
+    console.log(`${paisesFiltrados.length} países guardados exitosamente.`);
     return resultado;
   } catch (error) {
-    console.error("❌ Error al guardar los países:", error.message);
+    console.error("Error al guardar los países:", error.message);
     throw error;
   }
 }
@@ -52,7 +52,7 @@ export async function obtenerTodosLosPaises() {
     const paises = await listarPaises();
     return paises;
   } catch (error) {
-    console.error("❌ Error al listar los países:", error.message);
+    console.error("Error al listar los países:", error.message);
     throw error;
   }
 }
