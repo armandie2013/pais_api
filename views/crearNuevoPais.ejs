@@ -1,0 +1,57 @@
+<main class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Agregar Nuevo País</h1>
+  
+    <form action="/paises/agregar" method="POST" class="bg-white p-8 rounded-lg shadow-md space-y-4">
+  
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- NOMBRE -->
+        <input type="text" name="common" placeholder="Nombre común" required class="border p-2 rounded w-full">
+        <input type="text" name="official" placeholder="Nombre oficial" required class="border p-2 rounded w-full">
+        <input type="text" name="nativeName" placeholder="Native name (ej: spa)" class="border p-2 rounded w-full">
+  
+        <!-- ESTADO GENERAL -->
+        <input type="text" name="status" placeholder="Status (ej: officially-assigned)" class="border p-2 rounded w-full">
+        <label><input type="checkbox" name="independent" value="true"> Independiente</label>
+        <label><input type="checkbox" name="unMember" value="true"> Miembro ONU</label>
+  
+        <!-- UBICACIÓN -->
+        <input type="text" name="region" placeholder="Región" class="border p-2 rounded w-full">
+        <input type="text" name="subregion" placeholder="Subregión" class="border p-2 rounded w-full">
+        <input type="text" name="latlng" placeholder="Lat/Lng (ej: -34.6, -58.3)" class="border p-2 rounded w-full">
+        <label><input type="checkbox" name="landlocked" value="true"> Sin salida al mar</label>
+  
+        <!-- CAPITAL Y MAPAS -->
+        <input type="text" name="capital" placeholder="Capital" class="border p-2 rounded w-full">
+        <input type="text" name="capitalLatlng" placeholder="Capital lat/lng (ej: -34.6, -58.3)" class="border p-2 rounded w-full">
+        <input type="text" name="mapsGoogle" placeholder="URL Google Maps" class="border p-2 rounded w-full">
+        <input type="text" name="mapsOSM" placeholder="URL OpenStreetMaps" class="border p-2 rounded w-full">
+  
+        <!-- MONEDA / LENGUA / CÓDIGOS -->
+        <input type="text" name="currencies" placeholder="Monedas (ARS, USD)" class="border p-2 rounded w-full">
+        <input type="text" name="languages" placeholder="Idiomas (spa, eng)" class="border p-2 rounded w-full">
+        <input type="text" name="fifa" placeholder="Código FIFA" class="border p-2 rounded w-full">
+  
+        <!-- DATOS NUMÉRICOS -->
+        <input type="number" name="area" placeholder="Área en km²" class="border p-2 rounded w-full">
+        <input type="number" name="population" placeholder="Población" class="border p-2 rounded w-full">
+        <input type="text" name="gini" placeholder="GINI (ej: 2019:42.9)" class="border p-2 rounded w-full">
+  
+        <!-- TIEMPO / BANDERA -->
+        <input type="text" name="timezones" placeholder="Zonas horarias (ej: UTC-03:00)" class="border p-2 rounded w-full">
+        <input type="text" name="startOfWeek" placeholder="Inicio de semana (monday/sunday)" class="border p-2 rounded w-full">
+        <input type="text" name="flagPng" placeholder="URL Bandera PNG" class="border p-2 rounded w-full">
+        <input type="text" name="flagSvg" placeholder="URL Bandera SVG" class="border p-2 rounded w-full">
+        <input type="text" name="flagAlt" placeholder="Descripción alternativa de bandera" class="border p-2 rounded w-full">
+  
+        <!-- OTROS -->
+        <input type="text" name="borders" placeholder="Fronteras (ej: BRA,CHL)" class="border p-2 rounded w-full">
+        <input type="text" name="continents" placeholder="Continentes (ej: America)" class="border p-2 rounded w-full">
+      </div>
+  
+      <div class="text-center pt-6">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-800 transition">
+          Guardar País
+        </button>
+      </div>
+    </form>
+  </main>

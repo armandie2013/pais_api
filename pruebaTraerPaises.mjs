@@ -3,7 +3,7 @@ import { traerPaisesExternos, guardarPaisesFiltrados } from "./services/paisesEx
 
 async function main() {
   try {
-    await connectDB(); // ✅ Primero conectar a la base
+    await connectDB(); // Primero conectar a la base
 
     const paisesFiltrados = await traerPaisesExternos();
     console.log(`Se filtraron ${paisesFiltrados.length} países.`);
