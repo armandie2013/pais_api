@@ -15,3 +15,18 @@ export async function guardarPais(paisData) {
   const nuevoPais = new Pais(paisData);
   return await nuevoPais.save();
 }
+
+// Obtener pais por id
+export async function obtenerPaisPorId(id) {
+  return await Pais.findById(id);
+}
+
+// Actualizar pais por id + datos
+export async function actualizarPaisPorId(id, datos) {
+  return await Pais.findByIdAndUpdate(id, datos, { new: true });
+}
+
+// Eliminar registro de la base de datos
+export async function eliminarPaisPorId(id) {
+  return await Pais.findByIdAndDelete(id);
+}

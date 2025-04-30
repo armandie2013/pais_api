@@ -1,6 +1,6 @@
 import express from "express";
 
-import { listarPaisesController, mostrarFormularioAgregarPais, procesarFormularioNuevoPais } from "../controllers/paisController.mjs";
+import { listarPaisesController, mostrarFormularioAgregarPais, procesarFormularioNuevoPais, mostrarFormularioEditarPais, procesarEdicionPais, eliminarPaisController } from "../controllers/paisController.mjs";
 
 const router=express.Router();
 
@@ -19,8 +19,14 @@ router.get("/paises/agregar", mostrarFormularioAgregarPais);
 // Procesar el formulario
 router.post("/paises/agregar", procesarFormularioNuevoPais);
 
-// router.get("/:id/editar", mostrarFormularioEditarPais);
-// router.post("/:id/editar", procesarEdicionPais);
+// Mostra el formulario con los datos cargados para editar
+router.get("/paises/:id/editar", mostrarFormularioEditarPais);
+
+// Procesar la edicion
+router.post("/paises/:id/editar", procesarEdicionPais);
+
+// Eliminar registro
+router.get("/paises/:id/eliminar", eliminarPaisController);
 
 
 

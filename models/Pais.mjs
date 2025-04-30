@@ -5,20 +5,20 @@ const paisSchema = new mongoose.Schema({
     common: { type: String, required: true },
     official: { type: String, required: true },
     nativeName: { 
-      type: mongoose.Schema.Types.Mixed // Puede haber idiomas dinámicos
+      type: mongoose.Schema.Types.Mixed 
     }
   },
   independent: { type: Boolean },
   status: { type: String },
   unMember: { type: Boolean },
   currencies: { 
-    type: mongoose.Schema.Types.Mixed // Monedas dinámicas (ARS, USD, etc.)
+    type: mongoose.Schema.Types.Mixed 
   },
   capital: [String],
   region: { type: String },
   subregion: { type: String },
   languages: { 
-    type: mongoose.Schema.Types.Mixed // Idiomas dinámicos (grn, spa, etc.)
+    type: mongoose.Schema.Types.Mixed
   },
   latlng: [Number],
   landlocked: { type: Boolean },
@@ -31,7 +31,7 @@ const paisSchema = new mongoose.Schema({
   },
   population: { type: Number },
   gini: { 
-    type: mongoose.Schema.Types.Mixed // GINI por año (ej: {2019: 42.9})
+    type: mongoose.Schema.Types.Mixed
   },
   fifa: { type: String },
   timezones: [String],
@@ -47,7 +47,7 @@ const paisSchema = new mongoose.Schema({
   },
   creador: { type: String, default: "Diego Cardenes" }
 }, {
-  timestamps: true // createdAt, updatedAt automáticos
+  timestamps: true
 });
 
 const Pais = mongoose.model("Pais", paisSchema, "Grupo-05");
