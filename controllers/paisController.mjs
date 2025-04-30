@@ -5,6 +5,7 @@
   import Pais from "../models/Pais.mjs";
 
   import { crearNuevoPais, obtenerPaisPorId, editarPais, eliminarPais } from "../services/paisService.mjs";
+  import { validationResult } from "express-validator";
 
   export async function cargarPaisesController(req, res) {
     try {
@@ -169,7 +170,68 @@
 
   // Edita post
   export async function procesarEdicionPais(req, res) {
+    const errors = validationResult(req);
+  
+    if (!errors.isEmpty()) {
+      console.warn("Errores de validación:", errors.array());
+  
+      return res.status(400).render("editarPais", {
+        pais: {
+          _id: req.params.id,
+          name: {
+            common: req.body.common,
+            official: req.body.official,
+            nativeName: req.body.nativeName
+              ? { spa: { official: req.body.nativeName } }
+              : {}
+          },
+          independent: req.body.independent === "true",
+          unMember: req.body.unMember === "true",
+          status: req.body.status,
+          currencies: req.body.currencies
+            ? { [req.body.currencies]: { name: req.body.currencies } }
+            : {},
+          capital: req.body.capital ? [req.body.capital] : [],
+          region: req.body.region,
+          subregion: req.body.subregion,
+          latlng: req.body.latlng ? req.body.latlng.split(",").map(Number) : [],
+          landlocked: req.body.landlocked === "true",
+          borders: req.body.borders ? req.body.borders.split(",") : [],
+          area: req.body.area,
+          population: req.body.population,
+          gini: req.body.gini ? { "2019": req.body.gini } : {},
+          fifa: req.body.fifa,
+          timezones: req.body.timezones ? req.body.timezones.split(",") : [],
+          continents: req.body.continents ? req.body.continents.split(",") : [],
+          flags: {
+            png: req.body.flagPng,
+            svg: req.body.flagSvg,
+            alt: req.body.flagAlt
+          },
+          maps: {
+            googleMaps: req.body.mapsGoogle,
+            openStreetMaps: req.body.mapsOSM
+          },
+          startOfWeek: req.body.startOfWeek,
+          capitalInfo: {
+            latlng: req.body.capitalLatlng
+              ? req.body.capitalLatlng.split(",").map(Number)
+              : []
+          },
+          creador: "Diego Cardenes"
+        },
+        errores: errors.array(),
+        title: "Editar País",
+        navbarLinks: [
+          { href: "/", text: "Pantalla Principal" },
+          { href: "/dashboard", text: "Volver al Dashboard" }
+        ]
+      });
+    }
+  
     try {
+      console.log("➡️ Datos recibidos para editar:", req.body);
+      const { id } = req.params;
       const {
         common,
         official,
@@ -199,7 +261,7 @@
         startOfWeek,
         capitalLatlng
       } = req.body;
-
+  
       const datosEditados = {
         name: {
           common,
@@ -240,14 +302,26 @@
         startOfWeek,
         capitalInfo: {
           latlng: capitalLatlng ? capitalLatlng.split(",").map(coord => parseFloat(coord.trim())) : []
-        }
+        },
+        creador: "Diego Cardenes"
       };
-
-      await editarPais(req.params.id, datosEditados);
+  
+      await editarPais(id, datosEditados);
+      console.log("✅ País editado con éxito");
       res.redirect("/dashboard");
+  
     } catch (error) {
-      console.error("Error al editar país:", error);
-      res.status(500).send("Error al editar país.");
+      console.error("❌ Error al editar país:", error.message);
+  
+      res.status(500).render("editarPais", {
+        pais: { _id: req.params.id, ...req.body },
+        errores: [{ msg: "Error interno al editar país: " + error.message }],
+        title: "Editar País",
+        navbarLinks: [
+          { href: "/", text: "Pantalla Principal" },
+          { href: "/dashboard", text: "Volver al Dashboard" }
+        ]
+      });
     }
   }
 

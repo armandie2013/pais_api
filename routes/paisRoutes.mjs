@@ -1,14 +1,18 @@
 import express from "express";
 
-import { listarPaisesController, mostrarFormularioAgregarPais, procesarFormularioNuevoPais, mostrarFormularioEditarPais, procesarEdicionPais, eliminarPaisController } from "../controllers/paisController.mjs";
+import {
+  listarPaisesController,
+  mostrarFormularioAgregarPais,
+  procesarFormularioNuevoPais,
+  mostrarFormularioEditarPais,
+  procesarEdicionPais,
+  eliminarPaisController,
+} from "../controllers/paisController.mjs";
 
-const router=express.Router();
+import { validationDataPaises } from "../middlewares/validationRules.mjs";
+import { handleValidationErrorsEdit } from "../middlewares/errorMiddleware.mjs";
 
-
-
-
-
-
+const router = express.Router();
 
 // Mostrar el dashboard
 router.get("/dashboard", listarPaisesController);
@@ -23,17 +27,14 @@ router.post("/paises/agregar", procesarFormularioNuevoPais);
 router.get("/paises/:id/editar", mostrarFormularioEditarPais);
 
 // Procesar la edicion
-router.post("/paises/:id/editar", procesarEdicionPais);
+router.post(
+    "/paises/:id/editar",
+    validationDataPaises,
+    handleValidationErrorsEdit,
+    procesarEdicionPais
+  );
 
 // Eliminar registro
 router.get("/paises/:id/eliminar", eliminarPaisController);
-
-
-
-
-
-
-
-
 
 export default router;

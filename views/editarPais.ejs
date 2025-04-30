@@ -1,52 +1,61 @@
 <main class="container mx-auto px-4 py-8">
     <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Editar País</h1>
+    <% if (typeof errores !== 'undefined' && errores.length > 0) { %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <ul class="list-disc pl-5">
+          <% errores.forEach(error => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      </div>
+    <% } %>
   
-    <form action="/paises/<%= pais._id %>/editar" method="POST" class="bg-white p-8 rounded-lg shadow-md space-y-4">
+    <form action="/paises/<%= pais._id %>/editar" method="POST" class="bg-white p-8 rounded-lg shadow-md space-y-4 border border-gray-300">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- NOMBRE -->
+        
         <input type="text" name="common" value="<%= pais.name.common %>" placeholder="Nombre común" required class="border p-2 rounded w-full">
         <input type="text" name="official" value="<%= pais.name.official %>" placeholder="Nombre oficial" required class="border p-2 rounded w-full">
         <input type="text" name="nativeName" value="<%= pais.name?.nativeName?.spa?.official || '' %>" placeholder="Native name" class="border p-2 rounded w-full">
   
-        <!-- ESTADO -->
+        
         <label><input type="checkbox" name="independent" value="true" <%= pais.independent ? 'checked' : '' %>> Independiente</label>
         <label><input type="checkbox" name="unMember" value="true" <%= pais.unMember ? 'checked' : '' %>> Miembro ONU</label>
         <input type="text" name="status" value="<%= pais.status %>" placeholder="Status" class="border p-2 rounded w-full">
   
-        <!-- UBICACIÓN -->
+        
         <input type="text" name="region" value="<%= pais.region %>" placeholder="Región" class="border p-2 rounded w-full">
         <input type="text" name="subregion" value="<%= pais.subregion %>" placeholder="Subregión" class="border p-2 rounded w-full">
         <input type="text" name="latlng" value="<%= pais.latlng ? pais.latlng.join(', ') : '' %>" placeholder="Lat/Lng (ej: -34.6, -58.4)" class="border p-2 rounded w-full">
         <label><input type="checkbox" name="landlocked" value="true" <%= pais.landlocked ? 'checked' : '' %>> Sin salida al mar</label>
   
-        <!-- CAPITAL -->
+        
         <input type="text" name="capital" value="<%= pais.capital ? pais.capital[0] : '' %>" placeholder="Capital" class="border p-2 rounded w-full">
         <input type="text" name="capitalLatlng" value="<%= pais.capitalInfo?.latlng ? pais.capitalInfo.latlng.join(', ') : '' %>" placeholder="Lat/Lng de la capital" class="border p-2 rounded w-full">
   
-        <!-- MONEDAS Y CÓDIGOS -->
+        
         <input type="text" name="currencies" value="<%= Object.keys(pais.currencies || {})[0] || '' %>" placeholder="Moneda (ej: ARS)" class="border p-2 rounded w-full">
-        <input type="text" name="languages" value="<%= pais.languages ? Object.keys(pais.languages).join(', ') : '' %>" placeholder="Idiomas (ej: spa, eng)" class="border p-2 rounded w-full">
+        <input type="text" name="languages" value="<%= pais.languages ? Object.keys(pais.languages).join(', ') : '' %>" placeholder="Idiomas" class="border p-2 rounded w-full">
         <input type="text" name="fifa" value="<%= pais.fifa || '' %>" placeholder="Código FIFA" class="border p-2 rounded w-full">
   
-        <!-- NÚMEROS -->
+        
         <input type="number" name="area" value="<%= pais.area %>" placeholder="Área (km²)" class="border p-2 rounded w-full">
         <input type="number" name="population" value="<%= pais.population %>" placeholder="Población" class="border p-2 rounded w-full">
         <input type="text" name="gini" value="<%= pais.gini ? Object.values(pais.gini)[0] : '' %>" placeholder="GINI (ej: 42.9)" class="border p-2 rounded w-full">
   
-        <!-- TIEMPO Y MAPAS -->
-        <input type="text" name="timezones" value="<%= pais.timezones ? pais.timezones.join(', ') : '' %>" placeholder="Zonas horarias (ej: UTC-03:00)" class="border p-2 rounded w-full">
+     
+        <input type="text" name="timezones" value="<%= Array.isArray(pais.timezones) ? pais.timezones.join(', ') : pais.timezones || '' %>" placeholder="Zonas horarias (ej: UTC-03:00)" class="border p-2 rounded w-full">
         <input type="text" name="startOfWeek" value="<%= pais.startOfWeek %>" placeholder="Inicio de semana (monday)" class="border p-2 rounded w-full">
         <input type="text" name="mapsGoogle" value="<%= pais.maps?.googleMaps || '' %>" placeholder="Google Maps URL" class="border p-2 rounded w-full">
         <input type="text" name="mapsOSM" value="<%= pais.maps?.openStreetMaps || '' %>" placeholder="OpenStreetMap URL" class="border p-2 rounded w-full">
   
-        <!-- BANDERAS -->
+        
         <input type="text" name="flagPng" value="<%= pais.flags?.png || '' %>" placeholder="Bandera PNG URL" class="border p-2 rounded w-full">
         <input type="text" name="flagSvg" value="<%= pais.flags?.svg || '' %>" placeholder="Bandera SVG URL" class="border p-2 rounded w-full">
         <input type="text" name="flagAlt" value="<%= pais.flags?.alt || '' %>" placeholder="Descripción bandera" class="border p-2 rounded w-full">
   
-        <!-- FRONTERAS Y CONTINENTES -->
-        <input type="text" name="borders" value="<%= pais.borders ? pais.borders.join(', ') : '' %>" placeholder="Fronteras (ej: BRA,CHL)" class="border p-2 rounded w-full">
-        <input type="text" name="continents" value="<%= pais.continents ? pais.continents.join(', ') : '' %>" placeholder="Continentes (ej: America)" class="border p-2 rounded w-full">
+        
+        <input type="text" name="borders" value="<%= Array.isArray(pais.borders) ? pais.borders.join(', ') : pais.borders || '' %>" placeholder="Fronteras" class="border p-2 rounded w-full">
+        <input type="text" name="continents" value="<%= Array.isArray(pais.continents) ? pais.continents.join(', ') : pais.continents || '' %>" placeholder="Continentes" class="border p-2 rounded w-full">
       </div>
   
       <div class="text-center pt-6">

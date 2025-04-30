@@ -23,7 +23,7 @@ export async function obtenerPaisPorId(id) {
 
 // Actualizar pais por id + datos
 export async function actualizarPaisPorId(id, datos) {
-  return await Pais.findByIdAndUpdate(id, datos, { new: true });
+  return await Pais.findByIdAndUpdate(id, datos, { new: true, runValidators: true });
 }
 
 // Eliminar registro de la base de datos
