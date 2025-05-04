@@ -10,7 +10,7 @@ import {
 } from "../controllers/paisController.mjs";
 
 import { validationDataPaises } from "../middlewares/validationRules.mjs";
-import { handleValidationErrorsEdit } from "../middlewares/errorMiddleware.mjs";
+import { handleValidationErrors } from "../middlewares/errorMiddleware.mjs";
 
 const router = express.Router();
 
@@ -21,18 +21,23 @@ router.get("/dashboard", listarPaisesController);
 router.get("/paises/agregar", mostrarFormularioAgregarPais);
 
 // Procesar el formulario
-router.post("/paises/agregar", procesarFormularioNuevoPais);
+router.post(
+  "/paises/agregar",
+  validationDataPaises(),
+  handleValidationErrors,
+  procesarFormularioNuevoPais
+);
 
 // Mostra el formulario con los datos cargados para editar
 router.get("/paises/:id/editar", mostrarFormularioEditarPais);
 
 // Procesar la edicion
 router.post(
-    "/paises/:id/editar",
-    validationDataPaises,
-    handleValidationErrorsEdit,
-    procesarEdicionPais
-  );
+  "/paises/:id/editar",
+  validationDataPaises(),
+  handleValidationErrors,
+  procesarEdicionPais
+);
 
 // Eliminar registro
 router.get("/paises/:id/eliminar", eliminarPaisController);

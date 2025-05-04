@@ -1,57 +1,159 @@
 <main class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Agregar Nuevo País</h1>
-  
-    <form action="/paises/agregar" method="POST" class="bg-white p-8 rounded-lg shadow-md space-y-4 border border-gray-300">
-  
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- NOMBRE -->
-        <input type="text" name="common" placeholder="Nombre común" required class="border p-2 rounded w-full">
-        <input type="text" name="official" placeholder="Nombre oficial" required class="border p-2 rounded w-full">
-        <input type="text" name="nativeName" placeholder="Native name (ej: spa)" class="border p-2 rounded w-full">
-  
-        <!-- ESTADO GENERAL -->
-        <input type="text" name="status" placeholder="Status (ej: officially-assigned)" class="border p-2 rounded w-full">
-        <label><input type="checkbox" name="independent" value="true"> Independiente</label>
-        <label><input type="checkbox" name="unMember" value="true"> Miembro ONU</label>
-  
-        <!-- UBICACIÓN -->
-        <input type="text" name="region" placeholder="Región" class="border p-2 rounded w-full">
-        <input type="text" name="subregion" placeholder="Subregión" class="border p-2 rounded w-full">
-        <input type="text" name="latlng" placeholder="Lat/Lng (ej: -34.6, -58.3)" class="border p-2 rounded w-full">
-        <label><input type="checkbox" name="landlocked" value="true"> Sin salida al mar</label>
-  
-        <!-- CAPITAL Y MAPAS -->
-        <input type="text" name="capital" placeholder="Capital" class="border p-2 rounded w-full">
-        <input type="text" name="capitalLatlng" placeholder="Capital lat/lng (ej: -34.6, -58.3)" class="border p-2 rounded w-full">
-        <input type="text" name="mapsGoogle" placeholder="URL Google Maps" class="border p-2 rounded w-full">
-        <input type="text" name="mapsOSM" placeholder="URL OpenStreetMaps" class="border p-2 rounded w-full">
-  
-        <!-- MONEDA / LENGUA / CÓDIGOS -->
-        <input type="text" name="currencies" placeholder="Monedas (ARS, USD)" class="border p-2 rounded w-full">
-        <input type="text" name="languages" placeholder="Idiomas (spa, eng)" class="border p-2 rounded w-full">
-        <input type="text" name="fifa" placeholder="Código FIFA" class="border p-2 rounded w-full">
-  
-        <!-- DATOS NUMÉRICOS -->
-        <input type="number" name="area" placeholder="Área en km²" class="border p-2 rounded w-full">
-        <input type="number" name="population" placeholder="Población" class="border p-2 rounded w-full">
-        <input type="text" name="gini" placeholder="GINI (ej: 2019:42.9)" class="border p-2 rounded w-full">
-  
-        <!-- TIEMPO / BANDERA -->
-        <input type="text" name="timezones" placeholder="Zonas horarias (ej: UTC-03:00)" class="border p-2 rounded w-full">
-        <input type="text" name="startOfWeek" placeholder="Inicio de semana (monday/sunday)" class="border p-2 rounded w-full">
-        <input type="text" name="flagPng" placeholder="URL Bandera PNG" class="border p-2 rounded w-full">
-        <input type="text" name="flagSvg" placeholder="URL Bandera SVG" class="border p-2 rounded w-full">
-        <input type="text" name="flagAlt" placeholder="Descripción alternativa de bandera" class="border p-2 rounded w-full">
-  
-        <!-- OTROS -->
-        <input type="text" name="borders" placeholder="Fronteras (ej: BRA,CHL)" class="border p-2 rounded w-full">
-        <input type="text" name="continents" placeholder="Continentes (ej: America)" class="border p-2 rounded w-full">
+  <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Agregar Nuevo País</h1>
+
+  <% if (errores && errores.length > 0) { %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <ul class="list-disc pl-5">
+        <% errores.forEach(error => { %>
+          <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } %>
+
+  <form action="/paises/agregar" method="POST" class="bg-white p-8 rounded-lg shadow-md space-y-4 border border-gray-300">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div>
+        <label for="common" class="block text-sm font-medium text-gray-700">Nombre común</label>
+        <input type="text" id="common" name="common" placeholder="Nombre común" required class="border p-2 rounded w-full" value="<%= datos?.common || '' %>">
       </div>
-  
-      <div class="text-center pt-6">
-        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-800 transition">
-          Guardar País
-        </button>
+
+      <div>
+        <label for="official" class="block text-sm font-medium text-gray-700">Nombre oficial</label>
+        <input type="text" id="official" name="official" placeholder="Nombre oficial" required class="border p-2 rounded w-full" value="<%= datos?.official || '' %>">
       </div>
-    </form>
-  </main>
+
+      <div>
+        <label for="nativeName" class="block text-sm font-medium text-gray-700">Native name</label>
+        <input type="text" id="nativeName" name="nativeName" placeholder="Native name" class="border p-2 rounded w-full" value="<%= datos?.nativeName || '' %>">
+      </div>
+
+      <div>
+        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+        <input type="text" id="status" name="status" placeholder="Status" class="border p-2 rounded w-full" value="<%= datos?.status || '' %>">
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="independent" name="independent" value="true" <%= datos?.independent === 'true' ? 'checked' : '' %>>
+        <label for="independent" class="text-sm font-medium text-gray-700">Independiente</label>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="unMember" name="unMember" value="true" <%= datos?.unMember === 'true' ? 'checked' : '' %>>
+        <label for="unMember" class="text-sm font-medium text-gray-700">Miembro ONU</label>
+      </div>
+
+      <div>
+        <label for="region">Región</label>
+        <input type="text" id="region" name="region" placeholder="Región" class="border p-2 rounded w-full" value="<%= datos?.region || '' %>">
+      </div>
+
+      <div>
+        <label for="subregion">Subregión</label>
+        <input type="text" id="subregion" name="subregion" placeholder="Subregión" class="border p-2 rounded w-full" value="<%= datos?.subregion || '' %>">
+      </div>
+
+      <div>
+        <label for="latlng">Lat/Lng</label>
+        <input type="text" id="latlng" name="latlng" placeholder="Lat/Lng" class="border p-2 rounded w-full" value="<%= datos?.latlng || '' %>">
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="landlocked" name="landlocked" value="true" <%= datos?.landlocked === 'true' ? 'checked' : '' %>>
+        <label for="landlocked">Sin salida al mar</label>
+      </div>
+
+      <div>
+        <label for="capital">Capital</label>
+        <input type="text" id="capital" name="capital" placeholder="Capital" class="border p-2 rounded w-full" value="<%= datos?.capital || '' %>">
+      </div>
+
+      <div>
+        <label for="capitalLatlng">Capital lat/lng</label>
+        <input type="text" id="capitalLatlng" name="capitalLatlng" placeholder="Capital lat/lng" class="border p-2 rounded w-full" value="<%= datos?.capitalLatlng || '' %>">
+      </div>
+
+      <div>
+        <label for="mapsGoogle">Google Maps</label>
+        <input type="text" id="mapsGoogle" name="mapsGoogle" placeholder="Google Maps" class="border p-2 rounded w-full" value="<%= datos?.mapsGoogle || '' %>">
+      </div>
+
+      <div>
+        <label for="mapsOSM">OpenStreetMaps</label>
+        <input type="text" id="mapsOSM" name="mapsOSM" placeholder="OpenStreetMaps" class="border p-2 rounded w-full" value="<%= datos?.mapsOSM || '' %>">
+      </div>
+
+      <div>
+        <label for="currencies">Monedas</label>
+        <input type="text" id="currencies" name="currencies" placeholder="Monedas" class="border p-2 rounded w-full" value="<%= datos?.currencies || '' %>">
+      </div>
+
+      <div>
+        <label for="languages">Idiomas</label>
+        <input type="text" id="languages" name="languages" placeholder="Idiomas" class="border p-2 rounded w-full" value="<%= datos?.languages || '' %>">
+      </div>
+
+      <div>
+        <label for="fifa">Código FIFA</label>
+        <input type="text" id="fifa" name="fifa" placeholder="Código FIFA" class="border p-2 rounded w-full" value="<%= datos?.fifa || '' %>">
+      </div>
+
+      <div>
+        <label for="area">Área</label>
+        <input type="number" id="area" name="area" placeholder="Área" class="border p-2 rounded w-full" value="<%= datos?.area || '' %>">
+      </div>
+
+      <div>
+        <label for="population">Población</label>
+        <input type="number" id="population" name="population" placeholder="Población" class="border p-2 rounded w-full" value="<%= datos?.population || '' %>">
+      </div>
+
+      <div>
+        <label for="gini">GINI</label>
+        <input type="text" id="gini" name="gini" placeholder="GINI" class="border p-2 rounded w-full" value="<%= datos?.gini || '' %>">
+      </div>
+
+      <div>
+        <label for="timezones">Zonas Horarias</label>
+        <input type="text" id="timezones" name="timezones" placeholder="Zonas Horarias" class="border p-2 rounded w-full" value="<%= datos?.timezones || '' %>">
+      </div>
+
+      <div>
+        <label for="startOfWeek">Inicio de Semana</label>
+        <input type="text" id="startOfWeek" name="startOfWeek" placeholder="Inicio de Semana" class="border p-2 rounded w-full" value="<%= datos?.startOfWeek || '' %>">
+      </div>
+
+      <div>
+        <label for="flagPng">Bandera PNG</label>
+        <input type="text" id="flagPng" name="flagPng" placeholder="Bandera PNG" class="border p-2 rounded w-full" value="<%= datos?.flagPng || '' %>">
+      </div>
+
+      <div>
+        <label for="flagSvg">Bandera SVG</label>
+        <input type="text" id="flagSvg" name="flagSvg" placeholder="Bandera SVG" class="border p-2 rounded w-full" value="<%= datos?.flagSvg || '' %>">
+      </div>
+
+      <div>
+        <label for="flagAlt">Descripción Bandera</label>
+        <input type="text" id="flagAlt" name="flagAlt" placeholder="Descripción Bandera" class="border p-2 rounded w-full" value="<%= datos?.flagAlt || '' %>">
+      </div>
+
+      <div>
+        <label for="borders">Fronteras</label>
+        <input type="text" id="borders" name="borders" placeholder="Fronteras" class="border p-2 rounded w-full" value="<%= datos?.borders || '' %>">
+      </div>
+
+      <div>
+        <label for="continents">Continentes</label>
+        <input type="text" id="continents" name="continents" placeholder="Continentes" class="border p-2 rounded w-full" value="<%= datos?.continents || '' %>">
+      </div>
+    </div>
+
+    <div class="text-center pt-6">
+      <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-800 transition">
+        Guardar País
+      </button>
+    </div>
+  </form>
+</main>
