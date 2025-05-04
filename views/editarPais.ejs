@@ -55,8 +55,17 @@
       </div>
 
       <div>
-        <label for="latlng" class="block text-sm font-medium text-gray-700">Lat/Lng (ej: -34.6, -58.4)</label>
-        <input type="text" id="latlng" name="latlng" value="<%= pais.latlng ? pais.latlng.join(', ') : '' %>" placeholder="Lat/Lng" class="border p-2 rounded w-full">
+        <label for="latlng" class="block text-sm font-medium text-gray-700">Lat/Lng</label>
+        <input
+          type="text"
+          id="latlng"
+          name="latlng"
+          value="<%= pais.latlng ? pais.latlng.join(', ') : '' %>"
+          placeholder="-34.6,-58.4"
+          pattern="^-?\d{1,3}(\.\d+)?,\s*-?\d{1,3}(\.\d+)?$"
+          title="Ingrese dos coordenadas separadas por coma. Ejemplo: -34.6,-58.4"
+          class="border p-2 rounded w-full"
+        >
       </div>
 
       <div class="flex items-center space-x-2">
@@ -71,7 +80,16 @@
 
       <div>
         <label for="capitalLatlng" class="block text-sm font-medium text-gray-700">Lat/Lng de la capital</label>
-        <input type="text" id="capitalLatlng" name="capitalLatlng" value="<%= pais.capitalInfo?.latlng ? pais.capitalInfo.latlng.join(', ') : '' %>" placeholder="Capital lat/lng" class="border p-2 rounded w-full">
+        <input
+          type="text"
+          id="capitalLatlng"
+          name="capitalLatlng"
+          value="<%= pais.capitalInfo?.latlng ? pais.capitalInfo.latlng.join(', ') : '' %>"
+          placeholder="-34.6,-58.4"
+          pattern="^-?\d{1,3}(\.\d+)?,\s*-?\d{1,3}(\.\d+)?$"
+          title="Ingrese dos coordenadas separadas por coma. Ejemplo: -34.6,-58.4"
+          class="border p-2 rounded w-full"
+        >
       </div>
 
       <div>
