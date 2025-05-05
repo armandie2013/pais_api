@@ -30,7 +30,7 @@ export async function listarPaisesController(req, res) {
     });
 
     const navbarLinks = [
-      { href: "/", text: "Pantalla Principal" },
+      { href: "/dashboard", text: "Pantalla Principal" },
       { href: "/paises/agregar", text: "Agregar Nuevo País" },
     ];
 
@@ -47,7 +47,7 @@ export async function listarPaisesController(req, res) {
 
 export function mostrarFormularioAgregarPais(req, res) {
   const navbarLinks = [
-    { href: "/", text: "Pantalla Principal" },
+    { href: "/dashboard", text: "Pantalla Principal" },
     { href: "/paises/agregar", text: "Agregar Nuevo País" },
   ];
   res.render("crearNuevoPais", {
@@ -65,7 +65,7 @@ export async function procesarFormularioNuevoPais(req, res) {
       datos: req.body,
       title: "Agregar Nuevo País",
       navbarLinks: [
-        { href: "/", text: "Pantalla Principal" },
+        { href: "/dashboard", text: "Pantalla Principal" },
         { href: "/paises/agregar", text: "Agregar Nuevo País" },
       ],
     });
@@ -167,7 +167,7 @@ export async function procesarFormularioNuevoPais(req, res) {
       datos: req.body,
       title: "Agregar Nuevo País",
       navbarLinks: [
-        { href: "/", text: "Pantalla Principal" },
+        { href: "/dashboard", text: "Pantalla Principal" },
         { href: "/paises/agregar", text: "Agregar Nuevo País" },
       ],
     });
@@ -241,7 +241,7 @@ export async function procesarEdicionPais(req, res) {
       errores: req.validationErrors,
       title: "Editar País",
       navbarLinks: [
-        { href: "/", text: "Pantalla Principal" },
+        { href: "/dashboard", text: "Pantalla Principal" },
         { href: "/dashboard", text: "Volver al Dashboard" },
       ],
     });
@@ -339,7 +339,7 @@ export async function procesarEdicionPais(req, res) {
       errores: req.validationErrors,
       title: "Editar País",
       navbarLinks: [
-        { href: "/", text: "Pantalla Principal" },
+        { href: "/dashboard", text: "Pantalla Principal" },
         { href: "/dashboard", text: "Volver al Dashboard" },
       ],
     });

@@ -15,12 +15,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
       <div>
-        <label for="common" class="block text-sm font-medium text-gray-700">Nombre común</label>
+        <label for="common" class="block text-sm font-medium text-gray-700">Nombre comun</label>
         <input type="text" id="common" name="common" placeholder="Nombre común" required class="border p-2 rounded w-full" value="<%= datos?.common || '' %>">
       </div>
 
       <div>
-        <label for="official" class="block text-sm font-medium text-gray-700">Nombre oficial</label>
+        <label for="official" class="block text-sm font-medium text-red-700">Nombre oficial (REQUIERE VALIDACION)</label>
         <input type="text" id="official" name="official" placeholder="Nombre oficial" required class="border p-2 rounded w-full" value="<%= datos?.official || '' %>">
       </div>
 
@@ -74,7 +74,7 @@
       </div>
 
       <div>
-        <label for="capital">Capital</label>
+        <label for="capital" class="block text-sm font-medium text-red-700">Capital (REQUIERE VALIDACION)</label>
         <input type="text" id="capital" name="capital" placeholder="Capital" class="border p-2 rounded w-full" value="<%= datos?.capital || '' %>">
       </div>
 
@@ -118,12 +118,12 @@
       </div>
 
       <div>
-        <label for="area">Área</label>
+        <label for="area" class="block text-sm font-medium text-red-700">Area (REQUIERE VALIDACION)</label>
         <input type="number" id="area" name="area" placeholder="Área" class="border p-2 rounded w-full" value="<%= datos?.area || '' %>">
       </div>
 
       <div>
-        <label for="population">Población</label>
+        <label for="population" class="block text-sm font-medium text-red-700">Población (REQUIERE VALIDACION)</label>
         <input type="number" id="population" name="population" placeholder="Población" class="border p-2 rounded w-full" value="<%= datos?.population || '' %>">
       </div>
 
@@ -158,7 +158,7 @@
       </div>
 
       <div>
-        <label for="borders">Fronteras</label>
+        <label for="borders" class="block text-sm font-medium text-red-700">Fronteras (REQUIERE VALIDACION)</label>
         <input type="text" id="borders" name="borders" placeholder="Fronteras" class="border p-2 rounded w-full" value="<%= datos?.borders || '' %>">
       </div>
 

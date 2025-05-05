@@ -20,7 +20,7 @@
       </div>
 
       <div>
-        <label for="official" class="block text-sm font-medium text-gray-700">Nombre oficial</label>
+        <label for="official" class="block text-sm font-medium text-red-700">Nombre oficial (REQUIERE VALIDACION)</label>
         <input type="text" id="official" name="official" value="<%= pais.name.official %>" placeholder="Nombre oficial" required class="border p-2 rounded w-full">
       </div>
 
@@ -74,7 +74,7 @@
       </div>
 
       <div>
-        <label for="capital" class="block text-sm font-medium text-gray-700">Capital</label>
+        <label for="capital" class="block text-sm font-medium text-red-700">Capital (REQUIERE VALIDACION)</label>
         <input type="text" id="capital" name="capital" value="<%= pais.capital ? pais.capital[0] : '' %>" placeholder="Capital" class="border p-2 rounded w-full">
       </div>
 
@@ -108,12 +108,12 @@
       </div>
 
       <div>
-        <label for="area" class="block text-sm font-medium text-gray-700">Área (km²)</label>
+        <label for="area" class="block text-sm font-medium text-red-700">Area (REQUIERE VALIDACION)</label>
         <input type="number" id="area" name="area" value="<%= pais.area %>" placeholder="Área" class="border p-2 rounded w-full">
       </div>
 
       <div>
-        <label for="population" class="block text-sm font-medium text-gray-700">Población</label>
+        <label for="population" class="block text-sm font-medium text-red-700">Poblacion (REQUIERE VALIDACION)</label>
         <input type="number" id="population" name="population" value="<%= pais.population %>" placeholder="Población" class="border p-2 rounded w-full">
       </div>
 
@@ -158,7 +158,7 @@
       </div>
 
       <div>
-        <label for="borders" class="block text-sm font-medium text-gray-700">Fronteras</label>
+        <label for="borders" class="block text-sm font-medium text-red-700">Fronteras (REQUIERE VALIDACION)</label>
         <input type="text" id="borders" name="borders" value="<%= Array.isArray(pais.borders) ? pais.borders.join(', ') : pais.borders || '' %>" placeholder="Fronteras" class="border p-2 rounded w-full">
       </div>
 
