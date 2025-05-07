@@ -8,7 +8,7 @@
           <th class="py-3 px-6 text-left">Nombre Oficial</th>
           <th class="py-3 px-6 text-left">Capital</th>
           <th class="py-3 px-6 text-left">Fronteras</th>
-          <th class="py-3 px-6 text-left">Área (km²)</th>
+          <th class="py-3 px-6 text-left">Área</th>
           <th class="py-3 px-6 text-left">Población</th>
           <th class="py-3 px-6 text-left">Zonas Horarias</th>
           <th class="py-3 px-6 text-left">Bandera</th>
@@ -51,6 +51,7 @@
             <!-- Acciones -->
             <td class="py-4 px-6 text-left">
               <div class="flex flex-col space-y-1">
+                <a href="/paises/<%= pais._id %>/ver" class="text-green-600 hover:underline font-normal">Ver</a>
                 <a href="/paises/<%= pais._id %>/editar" class="text-blue-600 hover:underline font-normal">Editar</a>
                 <a href="/paises/<%= pais._id %>/eliminar"
                   onclick="return confirm('¿Estás seguro de que deseas eliminar este país? Esta acción no se puede deshacer.');"

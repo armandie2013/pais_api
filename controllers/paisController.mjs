@@ -356,3 +356,16 @@ export async function eliminarPaisController(req, res) {
     res.status(500).send("Error al eliminar país.");
   }
 }
+
+// Ver pais
+export async function mostrarPaisController(req, res) {
+  try {
+    const pais = await obtenerPaisPorId(req.params.id);
+    if (!pais) return res.status(404).send("País no encontrado");
+
+    res.render("verPais", { pais, title: "Detalle del País" });
+  } catch (error) {
+    console.error("Error al mostrar país:", error);
+    res.status(500).send("Error interno al mostrar país.");
+  }
+}

@@ -7,6 +7,7 @@ import {
   mostrarFormularioEditarPais,
   procesarEdicionPais,
   eliminarPaisController,
+  mostrarPaisController
 } from "../controllers/paisController.mjs";
 
 import { validationDataPaises } from "../middlewares/validationRules.mjs";
@@ -41,5 +42,8 @@ router.post(
 
 // Eliminar registro
 router.get("/paises/:id/eliminar", eliminarPaisController);
+
+// Ver
+router.get("/paises/:id/ver", mostrarPaisController);
 
 export default router;

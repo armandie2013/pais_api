@@ -1,0 +1,53 @@
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">Detalle del País</h1>
+
+        <div class="bg-white p-8 rounded-lg shadow-md border border-gray-300 space-y-4">
+            <p><strong>Nombre común:</strong>
+                <%= pais.name.common %>
+            </p>
+            <p><strong>Nombre oficial:</strong>
+                <%= pais.name.official %>
+            </p>
+            <p><strong>Native name:</strong>
+                <%= pais.name?.nativeName?.spa?.official || '' %>
+            </p>
+            <p><strong>Status:</strong>
+                <%= pais.status %>
+            </p>
+            <p><strong>Independiente:</strong>
+                <%= pais.independent ? 'Sí' : 'No' %>
+            </p>
+            <p><strong>Miembro ONU:</strong>
+                <%= pais.unMember ? 'Sí' : 'No' %>
+            </p>
+            <p><strong>Región:</strong>
+                <%= pais.region %>
+            </p>
+            <p><strong>Subregión:</strong>
+                <%= pais.subregion %>
+            </p>
+            <p><strong>Lat/Lng:</strong>
+                <%= pais.latlng?.join(', ') %></p>
+    <p><strong>Capital:</strong> <%= pais.capital?.join(' , ') %></p>
+    <p><strong>Capital Lat/Lng:</strong> <%= pais.capitalInfo?.latlng?.join(' , ') %></p>
+    <p><strong>Moneda:</strong> <%= Object.keys(pais.currencies || {})[0] || '' %></p>
+    <p><strong>Idiomas:</strong> <%= pais.languages ? Object.keys(pais.languages).join(' , ') : '' %></p>
+    <p><strong>Código FIFA:</strong> <%= pais.fifa %></p>
+    <p><strong>Área:</strong> <%= pais.area %> km²</p>
+    <p><strong>Población:</strong> <%= pais.population %></p>
+    <p><strong>GINI:</strong> <%= pais.gini ? Object.values(pais.gini)[0] : '' %></p>
+    <p><strong>Zonas horarias:</strong> <%= pais.timezones?.join(' , ') %></p>
+    <p><strong>Inicio de semana:</strong> <%= pais.startOfWeek %></p>
+    <p><strong>Google Maps:</strong> <a href="<%= pais.maps?.googleMaps %>" target="_blank">Abrir</a></p>
+    <p><strong>OpenStreetMap:</strong> <a href="<%= pais.maps?.openStreetMaps %>" target="_blank">Abrir</a></p>
+    <p><strong>Bandera PNG:</strong> <img src="<%= pais.flags?.png %>" alt="bandera" class="h-6 inline"> <%= pais.flags?.png %></p>
+    <p><strong>Descripción bandera:</strong> <%= pais.flags?.alt %></p>
+    <p><strong>Fronteras:</strong> <%= pais.borders?.join(' , ') %></p>
+    <p><strong>Continentes:</strong> <%= pais.continents?.join(' , ') %></p>
+  </div>
+
+  <div class="text-center pt-6">
+    <a href="/dashboard" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-800 transition">Volver</a>
+  </div>
+</main>
