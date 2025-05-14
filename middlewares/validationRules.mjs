@@ -1,7 +1,7 @@
 import { body } from "express-validator";
 
 export const validationDataPaises = () => [
-  // name.official ---> nombre oficial
+ 
   body("official")
     .trim()
     .notEmpty()
@@ -9,7 +9,7 @@ export const validationDataPaises = () => [
     .isLength({ min: 3, max: 90 })
     .withMessage("El nombre oficial debe tener entre 3 y 90 caracteres."),
 
-  // capital ---> debe ser un array de strings válidos
+ 
   body("capital")
     .custom((value) => {
       if (!value) return true;
@@ -20,10 +20,10 @@ export const validationDataPaises = () => [
       return true;
     }),
 
-  // borders ---> array de códigos de 3 letras mayúsculas
+  // Valida que este mayusculas ARG
   body("borders")
     .custom((value) => {
-      if (!value) return true; // opcional
+      if (!value) return true;
       const borders = Array.isArray(value) ? value : value.split(",");
       const regex = /^[A-Z]{3}$/;
       if (borders.some(code => !regex.test(code.trim()))) {
@@ -32,7 +32,7 @@ export const validationDataPaises = () => [
       return true;
     }),
 
-  // area ---> número positivo
+  
   body("area")
     .notEmpty()
     .withMessage("El área es obligatoria.")
@@ -42,7 +42,7 @@ export const validationDataPaises = () => [
       return true;
     }),
 
-  // population ---> número entero positivo
+  
   body("population")
     .notEmpty()
     .withMessage("La población es obligatoria.")

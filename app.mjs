@@ -26,7 +26,7 @@ app.use("/", paisesRoutes);
 
 connectDB();
 
-// app.use(methodOverride("_method"));
+
 
 
 app.use((req, res) => {

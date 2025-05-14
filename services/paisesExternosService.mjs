@@ -5,13 +5,13 @@ export async function traerPaisesExternos() {
   const respuesta = await fetch('https://restcountries.com/v3.1/all');
   const paises = await respuesta.json();
 
-  // Filtrar países que tienen idioma español
+  // Filtrar paises que tienen idioma español
   const paisesFiltrados = paises
     .filter(pais => pais.languages && pais.languages.spa)
     .map(pais => {
       const nuevoPais = { ...pais };
 
-      // Eliminamos campos que no queremos guardar
+      // Eliminamos campos
       delete nuevoPais.translations;
       delete nuevoPais.tld;
       delete nuevoPais.cca2;

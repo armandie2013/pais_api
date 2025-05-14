@@ -43,7 +43,7 @@ router.post(
 // Eliminar registro
 router.get("/paises/:id/eliminar", eliminarPaisController);
 
-// Ver
+// Ver pais
 router.get("/paises/:id/ver", mostrarPaisController);
 
 export default router;

@@ -11,6 +11,7 @@ import {
   eliminarPais,
 } from "../services/paisService.mjs";
 
+// Cargar paises 1 sola vez
 export async function cargarPaisesController(req, res) {
   try {
     const paisesFiltrados = await traerPaisesExternos();
@@ -22,6 +23,7 @@ export async function cargarPaisesController(req, res) {
   }
 }
 
+// Listar los paises
 export async function listarPaisesController(req, res) {
   try {
     const paises = await Pais.find({
@@ -45,6 +47,7 @@ export async function listarPaisesController(req, res) {
   }
 }
 
+// Mostrar formulario para agregar un pais
 export function mostrarFormularioAgregarPais(req, res) {
   const navbarLinks = [
     { href: "/dashboard", text: "Pantalla Principal" },
@@ -58,6 +61,7 @@ export function mostrarFormularioAgregarPais(req, res) {
   });
 }
 
+// Procesar formulario
 export async function procesarFormularioNuevoPais(req, res) {
   if (req.validationErrors) {
     return res.status(400).render("crearNuevoPais", {
@@ -156,7 +160,7 @@ export async function procesarFormularioNuevoPais(req, res) {
     };
 
     const paisCreado = await crearNuevoPais(nuevoPais);
-    console.log("*****Pais creado:", paisCreado._id);
+    console.log("------Pais creado:", paisCreado._id);
 
     res.redirect("/dashboard");
   } catch (error) {
@@ -173,7 +177,6 @@ export async function procesarFormularioNuevoPais(req, res) {
     });
   }
 }
-
 
 // Mostrar formulario para editar get
 export async function mostrarFormularioEditarPais(req, res) {
