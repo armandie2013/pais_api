@@ -1,6 +1,6 @@
 import { guardarPaises, listarPaises } from "../repositories/paisRepository.mjs";
 
-// Traer países de la API externa
+// Traer los paises de la API externa
 export async function traerPaisesExternos() {
   const respuesta = await fetch('https://restcountries.com/v3.1/all');
   const paises = await respuesta.json();
@@ -34,7 +34,7 @@ export async function traerPaisesExternos() {
   return paisesFiltrados;
 }
 
-// Guardar los países filtrados en MongoDB
+// Guardar los paises filtrados en MongoDB
 export async function guardarPaisesFiltrados(paisesFiltrados) {
   try {
     const resultado = await guardarPaises(paisesFiltrados);
@@ -46,7 +46,7 @@ export async function guardarPaisesFiltrados(paisesFiltrados) {
   }
 }
 
-// Listar los países ya guardados
+// Listar los paises ya guardados
 export async function obtenerTodosLosPaises() {
   try {
     const paises = await listarPaises();
